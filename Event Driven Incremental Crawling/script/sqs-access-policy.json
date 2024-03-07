@@ -1,0 +1,46 @@
+{
+  "Version": "2012-10-17",
+  "Id": "Policy1654426260132",
+  "Statement": [
+    {
+      "Sid": "Stmt1654426220843",
+      "Effect": "Allow",
+      "Principal": {
+        "AWS": "arn:aws:iam::459967084692:role/S3-Upload-queue-glue-role"
+      },
+      "Action": "sqs:*",
+      "Resource": "arn:aws:sqs:us-east-1:459967084692:S3-Upload-Queue"
+    },
+    {
+      "Sid": "Stmt1654426239080",
+      "Effect": "Allow",
+      "Principal": {
+        "Service": "s3.amazonaws.com"
+      },
+      "Action": "SQS:SendMessage",
+      "Resource": "arn:aws:sqs:us-east-1:459967084692:S3-Upload-Queue",
+      "Condition": {
+        "StringEquals": {
+          "aws:SourceAccount": "459967084692"
+        },
+        "ArnLike": {
+          "aws:SourceArn": "arn:aws:s3:::demo-fanout-noti-incremental-crawl"
+        }
+      }
+    },
+    {
+      "Sid": "Stmt12345",
+      "Effect": "Allow",
+      "Principal": {
+        "AWS": "*"
+      },
+      "Action": "sqs:SendMessage",
+      "Resource": "arn:aws:sqs:us-east-1:459967084692:S3-Upload-Queue",
+      "Condition": {
+        "ArnLike": {
+          "aws:SourceArn": "arn:aws:sns:us-east-1:459967084692:S3-Upload-Notification"
+        }
+      }
+    }
+  ]
+}
