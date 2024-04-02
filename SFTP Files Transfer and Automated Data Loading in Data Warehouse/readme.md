@@ -1,4 +1,4 @@
-# Zip Files Transfer and Automated Data Loading in Data Warehouse
+# Zip Files Transfer and Automated Data Loading to Data Warehouse
 
 ### Overview:
 In this scenario, users frequently receive numerous zipped files containing CSV data, sourced from the enterprise ecosystem. The primary objective is to securely transfer this data into an S3 bucket, serving as the data layer. The workflow involves unzipping each file and converting its contents into the Parquet format, optimizing it for downstream analysis. Additionally, the processed data should seamlessly populate a data warehouse, consolidating it into a unified table for cohesive analysis.
